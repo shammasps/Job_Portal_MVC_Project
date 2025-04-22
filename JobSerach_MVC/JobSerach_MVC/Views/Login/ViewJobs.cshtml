@@ -1,0 +1,44 @@
+﻿@using JobSerach_MVC.Models
+@model IEnumerable<sp_viewCompanyjobs_Result>
+@{
+    ViewBag.Title = "ViewJobs";
+}
+
+<h2>Current Job Openings</h2>
+
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>CompanyName</th>
+            <th>Jobtitle</th>
+            <th>Skills</th>
+            <th>JobExp</th>
+            <th>Job Title</th>
+            <th>JobStatus</th>
+            <th>JobEndDate</th>
+
+        </tr>
+        @foreach (var app in Model)
+        {
+            <tr>
+                <td>@app.Company_Name</td>
+                <td>@app.Job_Title</td>
+                <td>@app.Job_Skills</td>
+                <td>@app.Jobexp_Year</td>
+                <td>@app.Job_Title</td>
+                <td>@app.Job_Status</td>
+                <td>@Convert.ToDateTime(app.Job_EndDate).ToString("dd-MM-yyyy")</td>
+
+
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No applications found.</p>
+}
+
+@Html.ActionLink("Back to Home Page", "CompanyHome", "Login")

@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Mvc_ProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Company_JobAdd_TB">
+    <Key>
+      <PropertyRef Name="Job_Id" />
+    </Key>
+    <Property Name="Job_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+    <Property Name="Job_Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Job_Description" Type="varchar(max)" Nullable="false" />
+    <Property Name="Job_Skills" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Jobexp_Year" Type="int" Nullable="false" />
+    <Property Name="Min_Qulification" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Job_Status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Job_EndDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyRegTB">
+    <Key>
+      <PropertyRef Name="Company_Id" />
+    </Key>
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+    <Property Name="Company_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Company_Address" Type="varchar" MaxLength="350" Nullable="false" />
+    <Property Name="Company_Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Website_Address" Type="varchar" MaxLength="350" Nullable="false" />
+    <Property Name="Phone" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobApplication_TB">
+    <Key>
+      <PropertyRef Name="Applay_Id" />
+    </Key>
+    <Property Name="Applay_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Job_Id" Type="int" Nullable="false" />
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+    <Property Name="Resume" Type="varchar" MaxLength="350" Nullable="false" />
+    <Property Name="Submit_Date" Type="date" Nullable="false" />
+    <Property Name="Application_Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LoginTB">
+    <Key>
+      <PropertyRef Name="Log_Id" />
+    </Key>
+    <Property Name="Log_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Reg_Id" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserType" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRegTB">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="User_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_Address" Type="varchar" MaxLength="350" Nullable="false" />
+    <Property Name="User_Phone" Type="bigint" Nullable="false" />
+    <Property Name="User_Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Skills" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Exp_Years" Type="int" Nullable="false" />
+    <Property Name="Qulification" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="User_Country" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_State" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_City" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_Gender" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="User_Photo" Type="varchar" MaxLength="350" Nullable="false" />
+    <Property Name="Pincode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LinkedIn_Profile" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Function Name="sp_applycv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="int" Mode="In" />
+    <Parameter Name="jid" Type="int" Mode="In" />
+    <Parameter Name="cid" Type="int" Mode="In" />
+    <Parameter Name="resume" Type="varchar" Mode="In" />
+    <Parameter Name="sDate" Type="date" Mode="In" />
+    <Parameter Name="aStatus" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_companyInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cid" Type="int" Mode="In" />
+    <Parameter Name="cname" Type="varchar" Mode="In" />
+    <Parameter Name="cadd" Type="varchar" Mode="In" />
+    <Parameter Name="cemail" Type="varchar" Mode="In" />
+    <Parameter Name="cwebadd" Type="varchar" Mode="In" />
+    <Parameter Name="cphone" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_companyJobAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cId" Type="int" Mode="In" />
+    <Parameter Name="Job_Title" Type="varchar" Mode="In" />
+    <Parameter Name="Job_Description" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Job_Skills" Type="varchar" Mode="In" />
+    <Parameter Name="Jobexp_Year" Type="int" Mode="In" />
+    <Parameter Name="Job_MinQuli" Type="varchar" Mode="In" />
+    <Parameter Name="Job_Status" Type="varchar" Mode="In" />
+    <Parameter Name="Job_EndDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_getjobApllication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_jobsearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="qry" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_loginCountId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="una" Type="varchar" Mode="In" />
+    <Parameter Name="pwd" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_loginId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="una" Type="varchar" Mode="In" />
+    <Parameter Name="pwd" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_logInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="rid" Type="int" Mode="In" />
+    <Parameter Name="una" Type="varchar" Mode="In" />
+    <Parameter Name="pwd" Type="varchar" Mode="In" />
+    <Parameter Name="utype" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_loginType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="una" Type="varchar" Mode="In" />
+    <Parameter Name="pwd" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_MaxIdLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_userInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="int" Mode="In" />
+    <Parameter Name="uname" Type="varchar" Mode="In" />
+    <Parameter Name="uadd" Type="varchar" Mode="In" />
+    <Parameter Name="uphone" Type="bigint" Mode="In" />
+    <Parameter Name="uemail" Type="varchar" Mode="In" />
+    <Parameter Name="uskill" Type="varchar" Mode="In" />
+    <Parameter Name="uexpyears" Type="int" Mode="In" />
+    <Parameter Name="uQuli" Type="varchar" Mode="In" />
+    <Parameter Name="udob" Type="date" Mode="In" />
+    <Parameter Name="ucountry" Type="varchar" Mode="In" />
+    <Parameter Name="ustate" Type="varchar" Mode="In" />
+    <Parameter Name="ucity" Type="varchar" Mode="In" />
+    <Parameter Name="ugender" Type="varchar" Mode="In" />
+    <Parameter Name="uphoto" Type="varchar" Mode="In" />
+    <Parameter Name="upincode" Type="varchar" Mode="In" />
+    <Parameter Name="ulinkedinpro" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_viewAllJobs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_viewApplayjobs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_viewCompanyjobs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_viewProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="Mvc_ProjectModelStoreContainer">
+    <EntitySet Name="Company_JobAdd_TB" EntityType="Self.Company_JobAdd_TB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyRegTB" EntityType="Self.CompanyRegTB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobApplication_TB" EntityType="Self.JobApplication_TB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoginTB" EntityType="Self.LoginTB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRegTB" EntityType="Self.UserRegTB" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

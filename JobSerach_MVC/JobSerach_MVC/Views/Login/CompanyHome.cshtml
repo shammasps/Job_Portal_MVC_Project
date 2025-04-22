@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "CompanyHome";
+}
+
+@*<h2>CompanyHome</h2>
+
+<div>
+    @Html.ActionLink("Post New Job Opening", "JobAdd_PageLoad", "JobAdd")
+    <br />
+    @Html.ActionLink("Current Job Openings", "ViewJobs", "Login")
+    <br />
+    @Html.ActionLink("Show Job Applications", "ViewJobApplications", "Login")
+    <br />
+</div>*@
+
+
+
+<style>
+    .company-home-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        flex-direction: column;
+        /*background: #f5f9ff;*/
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+    }
+
+    .welcome-text {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    .options-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .option-card {
+        padding: 20px 40px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        border-radius: 10px;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .option-card:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+    .logout-btn {
+        padding: 10px 20px;
+        background-color: #dc3545;
+        color: white;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+</style>
+
+<div class="company-home-container">
+    <div class="welcome-text">Welcome to Company Dashboard</div>
+
+    <div class="options-container">
+
+        <a href="@Url.Action("JobAdd_PageLoad", "JobAdd")" class="option-card">Post New Job Opening</a>
+        <a href="@Url.Action("ViewJobs", "Login")" class="option-card">Current Job Openings</a>
+        <a href="@Url.Action("ViewJobApplications", "Login")" class="option-card">Show Job Applications</a>
+    </div>
+
+    <div class="logout-container" style="margin-top: 30px;">
+        <form method="post" action="@Url.Action("Login_PageLoad", "Login")">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+</div>

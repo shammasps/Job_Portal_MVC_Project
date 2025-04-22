@@ -1,0 +1,28 @@
+﻿@model JobSerach_MVC.Models.CVInsert
+@{
+    ViewBag.Title = "ApplyCV_Load";
+}
+
+<h2>Apply Job</h2>
+<div>
+    @using (Html.BeginForm("Apply_click", "ApplyCV", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <label>Resume: </label>
+        </div>
+        <div>
+            <input type="file" name="file" />
+            @Html.ValidationMessage("Resume")
+
+        </div>
+        <div>
+            <input type="submit" value="Submit Application" />
+            @Html.DisplayFor(m => m.msg)
+        </div>
+
+    }
+    <div>
+        @Html.ActionLink("View All Jobs", "searchJob_PageLoad", "SearchJob")
+    </div>
+</div>
+

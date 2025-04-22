@@ -1,0 +1,402 @@
+﻿@*@model JobSerach_MVC.Models.UserInsert
+    @{
+        ViewBag.Title = "UserInsert_PageLoad";
+    }
+
+    <h2>User Registration</h2>
+    <div>
+        @using (Html.BeginForm("UserInsert_Click", "UserReg", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div>
+                <label>Name: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.uName)
+                @Html.ValidationMessageFor(m => m.uName)
+            </div>
+
+            <div>
+                <label>Addresss: </label>
+            </div>
+            <div>
+                @Html.TextAreaFor(m => m.uAddress)
+                @Html.ValidationMessageFor(m => m.uAddress)
+            </div>
+
+            <div>
+                <label>Phone Number: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.uPhone)
+                @Html.ValidationMessageFor(m => m.uPhone)
+            </div>
+
+            <div>
+                <label>Email: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.uEmail)
+                @Html.ValidationMessageFor(m => m.uEmail)
+            </div>
+
+            <div>
+                <label>Skills</label>
+            </div>
+            <div>
+                @Html.TextAreaFor(m => m.uSkills)
+                @Html.ValidationMessageFor(m => m.uSkills)
+            </div>
+
+
+            <div>
+                <label>Experience in Years: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.uExp, new { type = "number", min = "0", max = "50" })
+                @Html.ValidationMessageFor(m => m.uExp)
+            </div>
+
+            <div>
+                <label>Qualification: </label>
+                @foreach (var item in Model.MyQual)
+                {
+                    <label>
+                        <input type="checkbox" value="@item.Values" checked="@item.IsChecked" name="selectedQual" id="@item.Values" /> @Html.Raw(item.Text)
+                    </label>
+                }
+                @Html.ValidationMessageFor(m => m.uQulfication)
+            </div>
+
+            <div>
+                <label>DOB: </label>
+            </div>
+            <div>
+
+                @Html.TextBoxFor(m => m.uDOB, new { type = "date" })
+                @Html.ValidationMessageFor(m => m.uDOB)
+            </div>
+
+            <div>
+                <label>Country: </label>
+            </div>
+            <div>
+
+                @Html.TextBoxFor(m => m.uCountry)
+                @Html.ValidationMessageFor(m => m.uCountry)
+            </div>
+
+            <div>
+                <label>State: </label>
+            </div>
+            <div>
+
+                @Html.TextBoxFor(m => m.uState)
+                @Html.ValidationMessageFor(m => m.uState)
+            </div>
+
+            <div>
+                <label>City: </label>
+            </div>
+            <div>
+
+                @Html.TextBoxFor(m => m.uCity)
+                @Html.ValidationMessageFor(m => m.uCity)
+            </div>
+
+            <div>
+                <label>Gender: </label>
+            </div>
+            <div>
+                @Html.RadioButtonFor(m => m.uGender, "Male") Male
+                @Html.RadioButtonFor(m => m.uGender, "Female") Female
+
+                @Html.ValidationMessageFor(m => m.uGender)
+            </div>
+
+            <div>
+                <label>Photo: </label>
+            </div>
+            <div>
+                @Html.TextBox("file", "", new { Type = "file" })
+                @Html.ValidationMessage("Photo")
+
+            </div>
+
+            <div>
+                <label>Pincode: </label>
+            </div>
+            <div>
+
+                @Html.TextBoxFor(m => m.uPincode)
+                @Html.ValidationMessageFor(m => m.uPincode)
+            </div>
+
+            <div>
+                <label>Linkedin Profile url (optional): </label>
+            </div>
+            <div>
+
+                @Html.TextBoxFor(m => m.uLinkedIn_Profile)
+                @Html.ValidationMessageFor(m => m.uLinkedIn_Profile)
+            </div>
+
+            <div>
+                <label>Username: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.username)
+                @Html.ValidationMessageFor(m => m.username)
+            </div>
+
+            <div>
+                <label>Password: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.password)
+                @Html.ValidationMessageFor(m => m.password)
+            </div>
+
+            <div>
+                <label>Confirm Password: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.cPassword)
+                @Html.ValidationMessageFor(m => m.cPassword)
+            </div>
+
+            <div>
+                <input type="submit" value="Register" />
+                @Html.DisplayFor(m => m.usermsg)
+            </div>
+        }
+    </div>*@
+
+
+
+@model JobSerach_MVC.Models.UserInsert
+@{
+    ViewBag.Title = "User Registration";
+}
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    @*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">*@
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .form-container h2 {
+                text-align: center;
+                margin-bottom: 30px;
+                color: #333;
+            }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                font-size: 16px;
+                color: #333;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 10px;
+                font-size: 14px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+                .form-group input[type="file"] {
+                    padding: 5px;
+                }
+
+            .form-group .fa {
+                color: #6c757d;
+                margin-right: 8px;
+            }
+
+            .form-group input[type="radio"] {
+                margin-right: 8px;
+            }
+
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .form-container button:hover {
+                background-color: #0056b3;
+            }
+
+        .form-container .validation-message {
+            color: red;
+            font-size: 12px;
+        }
+
+        .form-container .optional-field {
+            color: #888;
+            font-style: italic;
+        }
+
+        .form-container .fa-check-circle {
+            color: #28a745;
+        }
+
+        .form-container .fa-times-circle {
+            color: #dc3545;
+        }
+    </style>
+    <div class="container form-container">
+        <h2>User Registration</h2>
+        @using (Html.BeginForm("UserInsert_Click", "UserReg", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label for="uName"><i class="fas fa-user"></i> Name:</label>
+                @Html.TextBoxFor(m => m.uName, new { @class = "form-control", placeholder = "Enter your full name" })
+                @Html.ValidationMessageFor(m => m.uName, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="uAddress"><i class="fas fa-map-marker-alt"></i> Address:</label>
+                @Html.TextAreaFor(m => m.uAddress, new { @class = "form-control", placeholder = "Enter your address" })
+                @Html.ValidationMessageFor(m => m.uAddress, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="uPhone"><i class="fas fa-phone"></i> Phone Number:</label>
+                @Html.TextBoxFor(m => m.uPhone, new { @class = "form-control", placeholder = "Enter your phone number" })
+                @Html.ValidationMessageFor(m => m.uPhone, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="uEmail"><i class="fas fa-envelope"></i> Email:</label>
+                @Html.TextBoxFor(m => m.uEmail, new { @class = "form-control", placeholder = "Enter your email" })
+                @Html.ValidationMessageFor(m => m.uEmail, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="uSkills"><i class="fas fa-cogs"></i> Skills:</label>
+                @Html.TextAreaFor(m => m.uSkills, new { @class = "form-control", placeholder = "Enter your skills" })
+                @Html.ValidationMessageFor(m => m.uSkills, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="uExp"><i class="fas fa-briefcase"></i> Experience in Years:</label>
+                @Html.TextBoxFor(m => m.uExp, new { @class = "form-control", type = "number", min = "0", max = "50", placeholder = "Years of experience" })
+                @Html.ValidationMessageFor(m => m.uExp, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label>Qualification:</label>
+                @foreach (var item in Model.MyQual)
+                {
+                    <div class="checkbox">
+                        <input type="checkbox" value="@item.Values" checked="@item.IsChecked" name="selectedQual" id="@item.Values" class="form-check-input" />
+                        <label class="form-check-label">@Html.Raw(item.Text)</label>
+                    </div>
+                }
+                @Html.ValidationMessageFor(m => m.uQulfication, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="uDOB"><i class="fas fa-calendar-alt"></i> Date of Birth:</label>
+                @Html.TextBoxFor(m => m.uDOB, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.uDOB, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="uCountry"><i class="fas fa-globe"></i> Country:</label>
+                @Html.TextBoxFor(m => m.uCountry, new { @class = "form-control", placeholder = "Enter your country" })
+                @Html.ValidationMessageFor(m => m.uCountry, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="uState"><i class="fas fa-location-arrow"></i> State:</label>
+                @Html.TextBoxFor(m => m.uState, new { @class = "form-control", placeholder = "Enter your state" })
+                @Html.ValidationMessageFor(m => m.uState, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="uCity"><i class="fas fa-city"></i> City:</label>
+                @Html.TextBoxFor(m => m.uCity, new { @class = "form-control", placeholder = "Enter your city" })
+                @Html.ValidationMessageFor(m => m.uCity, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label>Gender:</label><br />
+
+                <label class="radio">
+                    
+                    @Html.RadioButtonFor(m => m.uGender, "Male")  
+                    <label>Male</label>
+
+                </label>
+
+                <label class="radio">
+                    
+                    @Html.RadioButtonFor(m => m.uGender, "Female")
+                    <label>Female</label>
+                </label>
+                @Html.ValidationMessageFor(m => m.uGender, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="file"><i class="fas fa-image"></i> Photo:</label>
+                @Html.TextBox("file", "", new { @class = "form-control", Type = "file" })
+                @Html.ValidationMessage("Photo", "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="uPincode"><i class="fas fa-map-pin"></i> Pincode:</label>
+                @Html.TextBoxFor(m => m.uPincode, new { @class = "form-control", placeholder = "Enter your pincode" })
+                @Html.ValidationMessageFor(m => m.uPincode, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="uLinkedIn_Profile" class="optional-field"><i class="fab fa-linkedin"></i> Linkedin Profile URL (optional):</label>
+                @Html.TextBoxFor(m => m.uLinkedIn_Profile, new { @class = "form-control", placeholder = "Enter your LinkedIn profile URL" })
+                @Html.ValidationMessageFor(m => m.uLinkedIn_Profile, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="username"><i class="fas fa-user-circle"></i> Username:</label>
+                @Html.TextBoxFor(m => m.username, new { @class = "form-control", placeholder = "Choose a username" })
+                @Html.ValidationMessageFor(m => m.username, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="password"><i class="fas fa-lock"></i> Password:</label>
+                @Html.PasswordFor(m => m.password, new { @class = "form-control", placeholder = "Enter your password" })
+                @Html.ValidationMessageFor(m => m.password, "", new { @class = "validation-message" })
+            </div>
+
+            <div class="form-group">
+                <label for="cPassword"><i class="fas fa-lock"></i> Confirm Password:</label>
+                @Html.PasswordFor(m => m.cPassword, new { @class = "form-control", placeholder = "Confirm your password" })
+                @Html.ValidationMessageFor(m => m.cPassword, "", new { @class = "validation-message" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+            @Html.DisplayFor(m => m.usermsg)
+        }
+    </div>
+

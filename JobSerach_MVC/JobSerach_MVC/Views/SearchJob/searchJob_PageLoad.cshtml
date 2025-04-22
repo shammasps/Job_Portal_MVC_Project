@@ -1,0 +1,108 @@
+﻿@model JobSerach_MVC.Models.JobSearch
+@{
+    ViewBag.Title = "searchJob_PageLoad";
+}
+
+<h2>Job Search</h2>
+<br />
+<br />
+<div>
+    @using (Html.BeginForm("Searchjob_Click", "SearchJob", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <td style="padding-left:8px"><label>Skills:</label></td>
+                <td>@Html.TextBoxFor(m => m.insertse.skills)</td>
+                <td style="padding-left:8px"><label>Experience:</label></td>
+                <td>@Html.TextBoxFor(m => m.insertse.JobExp)</td>
+                <td style="padding-left:8px"><label>Company Name:</label></td>
+                <td>@Html.TextBoxFor(m => m.insertse.CompanyName)</td>
+                <td><input type="submit" value="Search" /></td>
+            </tr>
+        </table>
+    }
+</div>
+<br />
+<br />
+
+<div>
+
+
+    @using (Html.BeginForm("searchJob_PageLoad", "SearchJob", FormMethod.Get))
+    {
+        if (Model != null)
+        {
+            if (Model.selectjob != null && Model.selectjob.Count != 0)
+            {
+
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.insertse.CompanyName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.insertse.Jobtitle)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.insertse.skills)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.insertse.JobExp)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.insertse.JobStatus)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.insertse.JobEndDate)
+                        </th>
+
+                    </tr>
+
+                    @foreach (var item in Model.selectjob)
+                    {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Jobtitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.skills)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobExp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobStatus)
+                    </td>
+                    <td>
+                        @item.JobEndDate.ToString("dd-MM-yyyy")
+
+                        @*@Html.DisplayFor(modelItem => item.JobEndDate)*@
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Apply Now", "ApplyCV_Load", "ApplyCV", new { cid = item.companyId, jid = item.Jobid }, null)
+                    </td>
+                </tr>
+
+                    }
+
+                </table>
+            }
+        }
+        else
+        {
+            <script>
+                alert('No Data Available')
+            </script>
+        }
+    }
+    <div>
+        @Html.ActionLink("Back to Home Page", "UserHome", "Login")
+    </div>
+
+</div>
+

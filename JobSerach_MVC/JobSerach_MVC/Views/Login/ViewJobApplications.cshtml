@@ -1,0 +1,51 @@
+﻿@using JobSerach_MVC.Models
+@model IEnumerable<sp_getjobApllication_Result>
+
+@{
+    ViewBag.Title = "ViewJobApplications";
+}
+
+<h2>Job Applications</h2>
+
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Applicant Name</th>
+            <th>Email</th>
+            <th>LinkedIn</th>
+            <th>Phone</th>
+            <th>Job Title</th>
+            <th>Skills</th>
+            <th>Experience</th>
+            <th>Submission Date</th>
+            <th>Status</th>
+            <th>CV</th>
+        </tr>
+        @foreach (var app in Model)
+        {
+            <tr>
+                <td>@app.User_Name</td>
+                <td>@app.User_Email</td>
+                <td><a href="@app.LinkedIn_Profile" target="_blank">Profile</a></td>
+                <td>@app.User_Phone</td>
+                <td>@app.Job_Title</td>
+                <td>@app.Job_Skills</td>
+                <td>@app.Jobexp_Year</td>
+                <td>@Convert.ToDateTime(app.Submit_Date).ToString("dd-MM-yyyy")</td>
+                <td>@app.Application_Status</td>
+                <td>
+                    <a href="@Url.Content(app.Resume)" target="_blank">View CV</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No applications found.</p>
+}
+
+@Html.ActionLink("Back to Home Page", "CompanyHome", "Login")
+

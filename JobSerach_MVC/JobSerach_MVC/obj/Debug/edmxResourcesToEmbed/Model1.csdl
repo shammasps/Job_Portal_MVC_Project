@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Mvc_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Company_JobAdd_TB">
+    <Key>
+      <PropertyRef Name="Job_Id" />
+    </Key>
+    <Property Name="Job_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Company_Id" Type="Int32" Nullable="false" />
+    <Property Name="Job_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Job_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Job_Skills" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Jobexp_Year" Type="Int32" Nullable="false" />
+    <Property Name="Min_Qulification" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Job_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Job_EndDate" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="CompanyRegTB">
+    <Key>
+      <PropertyRef Name="Company_Id" />
+    </Key>
+    <Property Name="Company_Id" Type="Int32" Nullable="false" />
+    <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company_Address" Type="String" MaxLength="350" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Website_Address" Type="String" MaxLength="350" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LoginTB">
+    <Key>
+      <PropertyRef Name="Log_Id" />
+    </Key>
+    <Property Name="Log_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Reg_Id" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRegTB">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="Int32" Nullable="false" />
+    <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="User_Address" Type="String" MaxLength="350" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="User_Phone" Type="Int64" Nullable="false" />
+    <Property Name="User_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Skills" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Exp_Years" Type="Int32" Nullable="false" />
+    <Property Name="Qulification" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="User_Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="User_State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="User_City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="User_Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="User_Photo" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="Pincode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="LinkedIn_Profile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="Mvc_ProjectEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Company_JobAdd_TB" EntityType="Self.Company_JobAdd_TB" />
+    <EntitySet Name="CompanyRegTBs" EntityType="Self.CompanyRegTB" />
+    <EntitySet Name="LoginTBs" EntityType="Self.LoginTB" />
+    <EntitySet Name="UserRegTBs" EntityType="Self.UserRegTB" />
+    <FunctionImport Name="sp_companyInsert">
+      <Parameter Name="cid" Mode="In" Type="Int32" />
+      <Parameter Name="cname" Mode="In" Type="String" />
+      <Parameter Name="cadd" Mode="In" Type="String" />
+      <Parameter Name="cemail" Mode="In" Type="String" />
+      <Parameter Name="cwebadd" Mode="In" Type="String" />
+      <Parameter Name="cphone" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_loginCountId" ReturnType="Collection(Int32)">
+      <Parameter Name="una" Mode="In" Type="String" />
+      <Parameter Name="pwd" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_loginId" ReturnType="Collection(Int32)">
+      <Parameter Name="una" Mode="In" Type="String" />
+      <Parameter Name="pwd" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_logInsert">
+      <Parameter Name="rid" Mode="In" Type="Int32" />
+      <Parameter Name="una" Mode="In" Type="String" />
+      <Parameter Name="pwd" Mode="In" Type="String" />
+      <Parameter Name="utype" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_loginType" ReturnType="Collection(String)">
+      <Parameter Name="una" Mode="In" Type="String" />
+      <Parameter Name="pwd" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_MaxIdLogin" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="sp_userInsert">
+      <Parameter Name="uid" Mode="In" Type="Int32" />
+      <Parameter Name="uname" Mode="In" Type="String" />
+      <Parameter Name="uadd" Mode="In" Type="String" />
+      <Parameter Name="uphone" Mode="In" Type="Int64" />
+      <Parameter Name="uemail" Mode="In" Type="String" />
+      <Parameter Name="uskill" Mode="In" Type="String" />
+      <Parameter Name="uexpyears" Mode="In" Type="Int32" />
+      <Parameter Name="uQuli" Mode="In" Type="String" />
+      <Parameter Name="udob" Mode="In" Type="DateTime" />
+      <Parameter Name="ucountry" Mode="In" Type="String" />
+      <Parameter Name="ustate" Mode="In" Type="String" />
+      <Parameter Name="ucity" Mode="In" Type="String" />
+      <Parameter Name="ugender" Mode="In" Type="String" />
+      <Parameter Name="uphoto" Mode="In" Type="String" />
+      <Parameter Name="upincode" Mode="In" Type="String" />
+      <Parameter Name="ulinkedinpro" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_companyJobAdd">
+      <Parameter Name="cId" Mode="In" Type="Int32" />
+      <Parameter Name="Job_Title" Mode="In" Type="String" />
+      <Parameter Name="Job_Description" Mode="In" Type="String" />
+      <Parameter Name="Job_Skills" Mode="In" Type="String" />
+      <Parameter Name="Jobexp_Year" Mode="In" Type="Int32" />
+      <Parameter Name="Job_MinQuli" Mode="In" Type="String" />
+      <Parameter Name="Job_Status" Mode="In" Type="String" />
+      <Parameter Name="Job_EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_viewAllJobs" ReturnType="Collection(Mvc_ProjectModel.sp_viewAllJobs_Result)" />
+    <FunctionImport Name="sp_applycv">
+      <Parameter Name="uid" Mode="In" Type="Int32" />
+      <Parameter Name="jid" Mode="In" Type="Int32" />
+      <Parameter Name="cid" Mode="In" Type="Int32" />
+      <Parameter Name="resume" Mode="In" Type="String" />
+      <Parameter Name="sDate" Mode="In" Type="DateTime" />
+      <Parameter Name="aStatus" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_jobsearch">
+      <Parameter Name="qry" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="JobApplication_TB" EntityType="Mvc_ProjectModel.JobApplication_TB" />
+    <FunctionImport Name="sp_getjobApllication" ReturnType="Collection(Mvc_ProjectModel.sp_getjobApllication_Result)">
+      <Parameter Name="cid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_viewCompanyjobs" ReturnType="Collection(Mvc_ProjectModel.sp_viewCompanyjobs_Result)">
+      <Parameter Name="cid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_viewApplayjobs" ReturnType="Collection(Mvc_ProjectModel.sp_viewApplayjobs_Result)">
+      <Parameter Name="uid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_viewProfile" ReturnType="Collection(Mvc_ProjectModel.sp_viewProfile_Result)">
+      <Parameter Name="uid" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_viewAllJobs_Result">
+    <Property Type="String" Name="Company_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Job_Title" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Job_Skills" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Jobexp_Year" Nullable="false" />
+    <Property Type="String" Name="Job_Status" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Job_EndDate" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="JobApplication_TB">
+    <Key>
+      <PropertyRef Name="Applay_Id" />
+    </Key>
+    <Property Name="Applay_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="Int32" Nullable="false" />
+    <Property Name="Job_Id" Type="Int32" Nullable="false" />
+    <Property Name="Company_Id" Type="Int32" Nullable="false" />
+    <Property Name="Resume" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="Submit_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Application_Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <ComplexType Name="sp_getjobApllication_Result">
+    <Property Type="Int32" Name="Applay_Id" Nullable="false" />
+    <Property Type="String" Name="Resume" Nullable="false" MaxLength="350" />
+    <Property Type="DateTime" Name="Submit_Date" Nullable="false" />
+    <Property Type="String" Name="Application_Status" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="User_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="User_Email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LinkedIn_Profile" Nullable="true" MaxLength="255" />
+    <Property Type="Int64" Name="User_Phone" Nullable="false" />
+    <Property Type="String" Name="Job_Title" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Job_Skills" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Jobexp_Year" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_viewCompanyjobs_Result">
+    <Property Type="String" Name="Company_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Job_Title" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Job_Skills" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Jobexp_Year" Nullable="false" />
+    <Property Type="String" Name="Job_Status" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Job_EndDate" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_viewApplayjobs_Result">
+    <Property Type="Int32" Name="Applay_Id" Nullable="false" />
+    <Property Type="DateTime" Name="Submit_Date" Nullable="false" />
+    <Property Type="String" Name="Application_Status" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Job_Title" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Job_Skills" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Jobexp_Year" Nullable="false" />
+    <Property Type="String" Name="Min_Qulification" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Company_Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_viewProfile_Result">
+    <Property Type="Int32" Name="User_Id" Nullable="false" />
+    <Property Type="String" Name="User_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="User_Address" Nullable="false" MaxLength="350" />
+    <Property Type="Int64" Name="User_Phone" Nullable="false" />
+    <Property Type="String" Name="User_Email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Skills" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Exp_Years" Nullable="false" />
+    <Property Type="String" Name="Qulification" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="DOB" Nullable="false" />
+    <Property Type="String" Name="User_Country" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="User_State" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="User_City" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="User_Gender" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="User_Photo" Nullable="false" MaxLength="350" />
+    <Property Type="String" Name="Pincode" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="LinkedIn_Profile" Nullable="true" MaxLength="255" />
+  </ComplexType>
+</Schema>

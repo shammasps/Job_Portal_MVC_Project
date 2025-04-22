@@ -1,0 +1,202 @@
+﻿@*@model JobSerach_MVC.Models.CompanyInsert
+    @{
+        ViewBag.Title = "InsertCompany_PageLoad";
+    }
+
+    <h2>Company Registration</h2>
+
+    <div>
+        @using (Html.BeginForm("InsertCompany_Click", "CompanyReg", FormMethod.Post))
+        {
+            <div>
+                <label>Company Name: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.Cmp_Name)
+                @Html.ValidationMessageFor(m => m.Cmp_Name)
+            </div>
+
+            <div>
+                <label>Company Addresss: </label>
+            </div>
+            <div>
+                @Html.TextAreaFor(m => m.Cmp_Address)
+                @Html.ValidationMessageFor(m => m.Cmp_Address)
+            </div>
+
+            <div>
+                <label>Company Email: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.Cmp_Email)
+                @Html.ValidationMessageFor(m => m.Cmp_Email)
+            </div>
+
+            <div>
+                <label>Company Website Address: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.Cmp_WebAddress)
+                @Html.ValidationMessageFor(m => m.Cmp_WebAddress)
+            </div>
+
+            <div>
+                <label>Company Phone Number: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.Cmp_Phone)
+                @Html.ValidationMessageFor(m => m.Cmp_Phone)
+            </div>
+
+            <div>
+                <label>Username: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.username)
+                @Html.ValidationMessageFor(m => m.username)
+            </div>
+
+            <div>
+                <label>Password: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.password)
+                @Html.ValidationMessageFor(m => m.password)
+            </div>
+
+            <div>
+                <label>Confirm Password: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.cpassword)
+                @Html.ValidationMessageFor(m => m.cpassword)
+            </div>
+
+            <div>
+                <input type="submit" value="Register" />
+                @Html.DisplayFor(m => m.Cmp_msg)
+            </div>
+        }
+    </div>*@
+
+
+
+@model JobSerach_MVC.Models.CompanyInsert
+@{
+    ViewBag.Title = "InsertCompany_PageLoad";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+
+<style>
+    .form-container {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+    .form-group label {
+        font-size: 16px;
+        color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+    .validation-message {
+        color: red;
+        font-size: 12px;
+    }
+</style>
+
+<div class="container form-container">
+    <h2><i class="fas fa-building"></i> Company Registration</h2>
+
+    @using (Html.BeginForm("InsertCompany_Click", "CompanyReg", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label><i class="fas fa-building"></i> Company Name:</label>
+            @Html.TextBoxFor(m => m.Cmp_Name, new { @class = "form-control", placeholder = "Enter company name" })
+            @Html.ValidationMessageFor(m => m.Cmp_Name, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-map-marker-alt"></i> Company Address:</label>
+            @Html.TextAreaFor(m => m.Cmp_Address, new { @class = "form-control", placeholder = "Enter company address" })
+            @Html.ValidationMessageFor(m => m.Cmp_Address, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-envelope"></i> Company Email:</label>
+            @Html.TextBoxFor(m => m.Cmp_Email, new { @class = "form-control", placeholder = "Enter email" })
+            @Html.ValidationMessageFor(m => m.Cmp_Email, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-globe"></i> Company Website:</label>
+            @Html.TextBoxFor(m => m.Cmp_WebAddress, new { @class = "form-control", placeholder = "Enter website URL" })
+            @Html.ValidationMessageFor(m => m.Cmp_WebAddress, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-phone"></i> Phone Number:</label>
+            @Html.TextBoxFor(m => m.Cmp_Phone, new { @class = "form-control", placeholder = "Enter phone number" })
+            @Html.ValidationMessageFor(m => m.Cmp_Phone, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-user"></i> Username:</label>
+            @Html.TextBoxFor(m => m.username, new { @class = "form-control", placeholder = "Choose a username" })
+            @Html.ValidationMessageFor(m => m.username, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-lock"></i> Password:</label>
+            @Html.PasswordFor(m => m.password, new { @class = "form-control", placeholder = "Enter password" })
+            @Html.ValidationMessageFor(m => m.password, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-lock"></i> Confirm Password:</label>
+            @Html.PasswordFor(m => m.cpassword, new { @class = "form-control", placeholder = "Re-enter password" })
+            @Html.ValidationMessageFor(m => m.cpassword, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="form-group">
+            <button type="submit"><i class="fas fa-paper-plane"></i> Register</button>
+            <div class="text-success">
+                @Html.DisplayFor(m => m.Cmp_msg)
+            </div>
+        </div>
+    }
+</div>

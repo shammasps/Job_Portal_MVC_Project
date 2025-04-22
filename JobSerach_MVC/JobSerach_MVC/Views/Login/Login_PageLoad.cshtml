@@ -1,0 +1,106 @@
+﻿@*@model JobSerach_MVC.Models.Login
+    @{
+        ViewBag.Title = "Login_PageLoad";
+    }
+
+    <h2>Login</h2>
+    <div>
+        @using (Html.BeginForm("Login_Click", "Login", FormMethod.Get))
+        {
+            <div>
+                <label>UserName: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.username)
+                @Html.ValidationMessageFor(m => m.username)
+            </div>
+
+            <div>
+                <label>Password: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.password)
+                @Html.ValidationMessageFor(m => m.password)
+            </div>
+
+            <div>
+                <input type="submit" value="Login" />
+                @Html.DisplayFor(m => m.msg)
+            </div>
+
+
+        }
+    </div>*@
+@model JobSerach_MVC.Models.Login
+@{
+    ViewBag.Title = "Login_PageLoad";
+}
+
+<style>
+    
+
+    .login-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh; /* full screen */
+    }
+
+    .login-box {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        min-width: 300px;
+    }
+
+        .login-box label {
+            font-weight: bold;
+        }
+
+        .login-box input[type="submit"] {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            .login-box input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
+    .field {
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="login-wrapper">
+    <div class="login-box">
+        @using (Html.BeginForm("Login_Click", "Login", FormMethod.Get))
+        {
+            <h2>Login</h2>
+
+            <div class="field">
+                <label>UserName:</label>
+                @Html.TextBoxFor(m => m.username, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.username)
+            </div>
+
+            <div class="field">
+                <label>Password:</label>
+                @Html.PasswordFor(m => m.password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.password)
+            </div>
+
+            <input type="submit" value="Login" />
+
+            <div>
+                @Html.DisplayFor(m => m.msg)
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,181 @@
+﻿@*@model JobSerach_MVC.Models.AddJob
+    @{
+        ViewBag.Title = "JobAdd_PageLoad";
+    }
+
+    <h2>JobAdd</h2>
+
+    <div>
+        @using (Html.BeginForm("JobAdd_Click", "JobAdd", FormMethod.Post))
+        {
+            <div>
+                <label>Job Title: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.Job_Title)
+                @Html.ValidationMessageFor(m => m.Job_Title)
+            </div>
+
+            <div>
+                <label>Job Description: </label>
+            </div>
+            <div>
+                @Html.TextAreaFor(m => m.Job_Description)
+                @Html.ValidationMessageFor(m => m.Job_Description)
+            </div>
+
+            <div>
+                <label>Job Skills: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.Job_Skills)
+                @Html.ValidationMessageFor(m => m.Job_Skills)
+            </div>
+
+            <div>
+                <label>Job Experiance In Years: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.Jobexp_Year)
+                @Html.ValidationMessageFor(m => m.Jobexp_Year)
+            </div>
+
+            <div>
+                <label>Minimum Qulification: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.Min_Qulification)
+                @Html.ValidationMessageFor(m => m.Min_Qulification)
+            </div>
+
+            <div>
+                <label>Job End Date: </label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.Job_EndDate, new { type = "date" })
+                @Html.ValidationMessageFor(m => m.Job_EndDate)
+            </div>
+
+            <div>
+                <input type="submit" value="Job Added" />
+                @Html.DisplayFor(m => m.msg)
+            </div>
+        }
+    </div>*@
+
+@model JobSerach_MVC.Models.AddJob
+@{
+    ViewBag.Title = "JobAdd_PageLoad";
+}
+
+<h2 class="page-title">Add Job</h2>
+
+<div class="job-add-container">
+    @using (Html.BeginForm("JobAdd_Click", "JobAdd", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label for="Job_Title">Job Title:</label>
+            @Html.TextBoxFor(m => m.Job_Title, new { @class = "form-control", placeholder = "Enter Job Title" })
+            @Html.ValidationMessageFor(m => m.Job_Title, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="Job_Description">Job Description:</label>
+            @Html.TextAreaFor(m => m.Job_Description, new { @class = "form-control", placeholder = "Enter Job Description" })
+            @Html.ValidationMessageFor(m => m.Job_Description, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="Job_Skills">Job Skills:</label>
+            @Html.TextBoxFor(m => m.Job_Skills, new { @class = "form-control", placeholder = "Enter Job Skills" })
+            @Html.ValidationMessageFor(m => m.Job_Skills, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="Jobexp_Year">Job Experience (Years):</label>
+            @Html.TextBoxFor(m => m.Jobexp_Year, new { @class = "form-control", placeholder = "Enter Job Experience in Years" })
+            @Html.ValidationMessageFor(m => m.Jobexp_Year, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="Min_Qulification">Minimum Qualification:</label>
+            @Html.TextBoxFor(m => m.Min_Qulification, new { @class = "form-control", placeholder = "Enter Minimum Qualification" })
+            @Html.ValidationMessageFor(m => m.Min_Qulification, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="Job_EndDate">Job End Date:</label>
+            @Html.TextBoxFor(m => m.Job_EndDate, new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(m => m.Job_EndDate, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Add Job</button>
+            @*@Html.DisplayFor(m => m.msg, new { @class = "text-success" })*@
+        </div>
+
+            @Html.ActionLink("Back to Home Page", "CompanyHome", "Login", null, new { @class = "btn btn-secondary" })
+    }
+</div>
+
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 3rem;
+        color: #000000;
+    }
+
+    .job-add-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+    .text-danger {
+        font-size: 0.875rem;
+        color: #dc3545;
+    }
+
+    .text-success {
+        font-size: 1rem;
+        color: #28a745;
+    }
+</style>
